@@ -2,13 +2,12 @@
  * @Description: 
  * @Author: icony/精武陈真
  * @Date: 2019-11-24 01:14:55
- * @LastEditTime: 2019-11-24 02:12:29
+ * @LastEditTime: 2019-11-24 11:11:54
  * @LastEditors: icony/精武陈真
  */
 
 const dbConfig = require('../config/db.config.js')
 const Sequelize = require('sequelize');
-
 
 const sequelize = new Sequelize(
     dbConfig.MYSQL_DATABASE, 
@@ -27,6 +26,17 @@ const sequelize = new Sequelize(
     },
     
 );
+
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 
 
 module.exports = sequelize
