@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: icony/精武陈真
+ * @Date: 2019-11-19 15:28:27
+ * @LastEditTime: 2019-11-25 00:34:39
+ * @LastEditors: icony/精武陈真
+ */
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -5,9 +12,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
-const index = require('./routes/index')
-const users = require('./routes/users')
+const routes = require('./routes');
 
 // error handler
 onerror(app)
@@ -16,6 +21,7 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+// Pretty (non-compressed) json response middleware
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
@@ -33,8 +39,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+routes(app)
 
 // error-handling
 app.on('error', (err, ctx) => {
