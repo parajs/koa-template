@@ -1,4 +1,4 @@
-/*
+﻿/*
  * @Description: 
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
@@ -12,8 +12,9 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const responseTime = require('koa-response-time');
-const routes = require('./routes');
+const responseTime = require('koa-response-time')
+const cors = require('@koa/cors')
+const routes = require('./routes')
 
 // error handler
 onerror(app)
@@ -21,10 +22,10 @@ onerror(app)
 // middlewares
 
 app.use(responseTime()); 
+app.use(cors());
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
-
 
 // Pretty (non-compressed) json response middleware
 app.use(json())
