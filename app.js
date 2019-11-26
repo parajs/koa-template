@@ -12,15 +12,20 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const responseTime = require('koa-response-time');
 const routes = require('./routes');
 
 // error handler
 onerror(app)
 
 // middlewares
+
+app.use(responseTime()); 
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+
+
 // Pretty (non-compressed) json response middleware
 app.use(json())
 app.use(logger())
@@ -31,12 +36,12 @@ app.use(views(__dirname + '/views', {
 }))
 
 // logger
-// app.use(async (ctx, next) => {
-//   const start = new Date()
-//   await next()
-//   const ms = new Date() - start
-//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
+app.use(async (ctx, next) => {
+  const start = new Date()
+  await next()
+  const ms = new Date() - start
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+})
 
 // routes
 routes(app)

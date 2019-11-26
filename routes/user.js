@@ -9,27 +9,16 @@ const router = require('koa-router')()
 const { login } = require('../services/user')
 
 router.post('/login',async(ctx) => {
-    const body = ctx.request.body
-    try {
-        const user_name = body.user_name
-        const password = body.password
-        if (user_name && password) {
-          const b =  await login(user_name, password).then((data,b)=>{
-
-          })
-          ctx.body = {
-            data: {
-                b
-            }
-          }
-          
-        } else {
-            
-        }
-    } catch (error) {
+    const { user_name, password} = ctx.request.body
+    if (user_name && password) {
+     await login(user_name, password).then((result)=>{
+       console.log(result.dataValues)
+        ctx.body = result.dataValues
+      })
+      
+    } else {
         
     }
-    
   
 })
     
