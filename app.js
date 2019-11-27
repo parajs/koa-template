@@ -15,6 +15,9 @@ const logger = require('koa-logger')
 const responseTime = require('koa-response-time')
 const cors = require('@koa/cors')
 const routes = require('./routes')
+const resultUtil = require('./utils/resultUtil')
+
+global.resultUtil = resultUtil
 
 // error handler
 onerror(app)
@@ -22,7 +25,10 @@ onerror(app)
 // middlewares
 
 app.use(responseTime()); 
-app.use(cors());
+app.use(cors({
+  maxAge: 60*60,
+  allowHeaders: ['Authorization'],
+}));
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
@@ -49,6 +55,7 @@ routes(app)
 
 // error-handling
 app.on('error', (err, ctx) => {
+
   console.error('server error', err, ctx)
 });
 

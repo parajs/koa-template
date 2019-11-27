@@ -21,14 +21,14 @@ const User = sequelize.define('user', {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         get() {
-            return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
+            return this.getDataValue('create_time') ? moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss') : null;
         }
     },
     update_time: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         get() {
-            return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
+            return this.getDataValue('update_time')?moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss'): null;
         }
     },
 });
