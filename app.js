@@ -1,9 +1,9 @@
 ﻿/*
- * @Description: 
+ * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-25 00:34:39
- * @LastEditors: icony/精武陈真
+ * @LastEditTime: 2019-11-27 19:14:24
+ * @LastEditors: chenzhen
  */
 const Koa = require('koa')
 const app = new Koa()
@@ -15,9 +15,7 @@ const logger = require('koa-logger')
 const responseTime = require('koa-response-time')
 const cors = require('@koa/cors')
 const routes = require('./routes')
-const resultUtil = require('./utils/resultUtil')
 
-global.resultUtil = resultUtil
 
 // error handler
 onerror(app)
@@ -27,7 +25,7 @@ onerror(app)
 app.use(responseTime()); 
 app.use(cors({
   maxAge: 60*60,
-  allowHeaders: ['Authorization'],
+  allowHeaders: ['content-type','Authorization'],
 }));
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
@@ -55,7 +53,6 @@ routes(app)
 
 // error-handling
 app.on('error', (err, ctx) => {
-
   console.error('server error', err, ctx)
 });
 
