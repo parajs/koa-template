@@ -2,15 +2,17 @@
  * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-27 19:14:24
+ * @LastEditTime: 2019-11-28 00:08:39
  * @LastEditors: chenzhen
  */
 const Koa = require('koa')
+const path = require('path')
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
+// const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body')
 const logger = require('koa-logger')
 const responseTime = require('koa-response-time')
 const cors = require('@koa/cors')
@@ -27,9 +29,24 @@ app.use(cors({
   maxAge: 60*60,
   allowHeaders: ['content-type','Authorization'],
 }));
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+
+app.use(koaBody({
+  multipart:true, // 支持文件上传
+  formidable:{
+    uploadDir:path.join(__dirname,'public/upload/'), // 设置文件上传目录
+    keepExtensions: true,    // 保持文件的后缀
+    multipart: true,
+    maxFieldsSize:10 * 1024 * 1024, // 文件上传大小
+    onFileBegin:(name,file) => { // 文件上传前的设置
+      // console.log(`name: ${name}`);
+      // console.log(file);
+    },
+  }
 }))
+
+// app.use(bodyparser({
+//   enableTypes:['json', 'form', 'text']
+// }))
 
 // Pretty (non-compressed) json response middleware
 app.use(json())

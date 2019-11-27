@@ -2,13 +2,14 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-27 20:16:44
+ * @LastEditTime: 2019-11-27 23:37:28
  * @LastEditors: chenzhen
  */
 
 const router = require('koa-router')()
-const { login, signup } = require('../services/user')
+const { findUserByUserNamePassword, addUser } = require('../services/user')
 const { result,errorResult } = require('../utils/resultUtil')
+const sha256 = require('sha256')
 
 /**
  * @description: 登录
@@ -17,13 +18,17 @@ const { result,errorResult } = require('../utils/resultUtil')
  */
 router.post('/login',async(ctx) => {
     const { user_name, password} = ctx.request.body
-    if ((user_name && password)) {
-      await login(user_name, password).then((user)=>{
-          ctx.body = result({data: user})
+    if ( user_name && password ) {
+      const hashPwd = sha256(`${user_name}${password}`)
+      await findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
+          if( user.password === hashPwd ){
+            const {id, user_name} = user
+            ctx.body = result({data: {id, user_name}})
+          }
       })     
     } else {
       ctx.body = errorResult({msg: '请输入用户名和密码'}) 
-    }
+  }
 })
 
 /**
@@ -32,14 +37,20 @@ router.post('/login',async(ctx) => {
  * @return: 
  */
 router.post('/signup',async(ctx) => {
-  const { user_name, password} = ctx.request.body
-  if (user_name && password) {
-   await signup(user_name, password).then((user)=>{
-      ctx.body = result()
-    })
+  const { user_name, password, confirm_password} = ctx.request.body
+  if(user_name && password && confirm_password){
+    if (confirm_password === password) {
+      const hashPwd = sha256(`${user_name}${password}`)
+      await addUser(user_name, hashPwd).then(()=>{
+         ctx.body = result()
+       })
+     } else {
+       ctx.body = errorResult({msg: '密码不一致'}) 
+     }
   } else {
     ctx.body = errorResult({msg: '请输入用户名和密码'}) 
   }
+  
 
 })
     

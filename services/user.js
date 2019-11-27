@@ -2,29 +2,29 @@
  * @Description: 用户服务层
  * @Author: chenzhen
  * @Date: 2019-11-25 18:02:42
- * @LastEditTime: 2019-11-27 20:16:13
+ * @LastEditTime: 2019-11-27 23:12:23
  * @LastEditors: chenzhen
  */
 const User  = require('../models/user');
 
 /**
- * @description: 登录
+ * @description: 查询用户信息
  * @param {user_name，password} 
  * @return: 
  */
-exports.login = async(user_name, password) => {
+exports.findUserByUserNamePassword = async(user_name, password) => {
    return await User.findOne({ where: { user_name, password } }).then((result)=>{
       return Promise.resolve(result)
    })
 }
 
 /**
- * @description: 注册
+ * @description: 添加用户信息
  * @param {user} 
  * @return: 
  */
-exports.signup = async(user_name, password) => {
-   return await User.create({user_name,password}).then((result)=>{
+exports.addUser = async(user) => {
+   return await User.create(user).then((result)=>{
       return Promise.resolve(result)
    })
 }
