@@ -2,31 +2,22 @@
  * @Description: 
  * @Author: icony/精武陈真
  * @Date: 2019-11-24 01:14:55
- * @LastEditTime: 2019-11-25 00:54:21
- * @LastEditors: icony/精武陈真
+ * @LastEditTime: 2019-11-28 15:13:01
+ * @LastEditors: chenzhen
  */
 
-let  dbConfig = require('../config/db.config.dev.js');
-
-// if(process.env.NODE_ENV === 'development'){
-//      dbConfig = require('../config/db.config.dev.js');
-// }
-
-// if(process.env.NODE_ENV === 'production'){
-//     dbConfig = require('../config/db.config.prod.js');
-// }
-
+const  config = require('../config');
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(
-    dbConfig.MYSQL_DATABASE, 
-    dbConfig.MYSQL_USERNAME, 
-    dbConfig.MYSQL_PASSWORD, 
+    config.MYSQL_DATABASE, 
+    config.MYSQL_USERNAME, 
+    config.MYSQL_PASSWORD, 
     {
-        host: dbConfig.MYSQL_HOST,
-        port: dbConfig.MYSQL_POST,
-        dialect: dbConfig.MYSQL_DIALECT,
-        pool:dbConfig.MYSQL_POOL,
+        host: config.MYSQL_HOST,
+        port: config.MYSQL_PORT,
+        dialect: config.MYSQL_DIALECT,
+        pool:config.MYSQL_POOL,
         define: {
           // 不要添加时间戳属性 (updatedAt, createdAt)
           timestamps: false,

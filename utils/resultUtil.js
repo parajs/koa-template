@@ -1,5 +1,12 @@
+/*
+ * @Description: 生成响应结果
+ * @Author: chenzhen
+ * @Date: 2019-11-27 16:19:34
+ * @LastEditTime: 2019-11-28 11:22:13
+ * @LastEditors: chenzhen
+ */
 
-const result = (options) => {
+const result = (options = {}) => {
     const defaultOpts = {
         code: 200,
         msg: '操作成功',

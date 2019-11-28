@@ -1,10 +1,11 @@
 /*
- * @Description: mysql数据库配置
- * @Author: icony/精武陈真
- * @Date: 2019-11-24 01:24:58
- * @LastEditTime: 2019-11-24 23:59:57
- * @LastEditors: icony/精武陈真
+ * @Description: 本地开发配置
+ * @Author: chenzhen
+ * @Date: 2019-11-28 12:30:23
+ * @LastEditTime: 2019-11-28 15:07:40
+ * @LastEditors: chenzhen
  */
+
 const dbConfig = {
     MYSQL_DATABASE: 'koa_template',
     MYSQL_HOST: 'localhost',
@@ -21,4 +22,10 @@ const dbConfig = {
     
 }
 
-module.exports = dbConfig
+const configDev = {
+    
+    ...dbConfig
+} 
+
+
+module.exports = configDev
