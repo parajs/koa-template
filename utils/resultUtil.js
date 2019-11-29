@@ -2,7 +2,7 @@
  * @Description: 生成响应结果
  * @Author: chenzhen
  * @Date: 2019-11-27 16:19:34
- * @LastEditTime: 2019-11-28 11:22:13
+ * @LastEditTime: 2019-11-28 16:34:55
  * @LastEditors: chenzhen
  */
 
@@ -14,7 +14,9 @@ const result = (options = {}) => {
     }
 
     if (Object.prototype.toString.call(options) === '[object Object]' ){
-        return Object.assign({} ,defaultOpts, options)
+        let result = {}
+        Object.assign(result ,defaultOpts, options)
+        return result
     } else {
         console.error("resulttUtil:expected plain object")
     }

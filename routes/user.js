@@ -2,7 +2,7 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-28 11:58:06
+ * @LastEditTime: 2019-11-28 18:31:20
  * @LastEditors: chenzhen
  */
 
@@ -10,6 +10,7 @@ const router = require('koa-router')()
 const { findUserByUserNamePassword, addUser } = require('../services/user')
 const { result,errorResult } = require('../utils/resultUtil')
 const sha256 = require('sha256')
+const { jwtSign } = require('../utils/jwtUtil')
 
 /**
  * @description: 登录
@@ -23,7 +24,8 @@ router.post('/login',async(ctx) => {
       await findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
           if( user.password === hashPwd ){
             const {id, user_name} = user
-            ctx.body = result({data: {id, user_name}})
+            const token = jwtSign({id,user_name})
+            ctx.body = result({data: {id, user_name,token}})
           } else {
             ctx.body = errorResult({msg: '用户名或密码不正确'}) 
           }
@@ -60,6 +62,11 @@ router.post('/signup',async(ctx) => {
     ctx.body = errorResult({msg: '请输入用户名和密码'}) 
   }
   
+
+})
+
+router.post('/logout',async(ctx) => {
+  const { Authorization } = ctx.header
 
 })
     
