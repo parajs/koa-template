@@ -2,7 +2,7 @@
  * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-28 18:21:24
+ * @LastEditTime: 2019-11-29 18:52:01
  * @LastEditors: chenzhen
  */
 const Koa = require('koa')
@@ -17,7 +17,7 @@ const logger = require('koa-logger')
 const responseTime = require('koa-response-time')
 const cors = require('@koa/cors')
 const koaJwt = require("koa-jwt")
-const { SECRET_KEY, API_ROOT } = require('./config')
+const { JWT_SECRET_KEY, API_ROOT } = require('./config')
 const routes = require('./routes')
 
 
@@ -63,7 +63,7 @@ const login = new RegExp(`${API_ROOT}/user/login`)
 const signup = new RegExp(`${API_ROOT}/user/signup`)
 app.use(
   koaJwt({
-    secret:SECRET_KEY
+    secret:JWT_SECRET_KEY
   }).unless({
     path:[login,signup,/^\/public/]
   })

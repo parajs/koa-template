@@ -2,7 +2,7 @@
  * @Description: 本地开发配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:23
- * @LastEditTime: 2019-11-28 15:07:40
+ * @LastEditTime: 2019-11-29 18:23:43
  * @LastEditors: chenzhen
  */
 
@@ -18,7 +18,8 @@ const dbConfig = {
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    UPLOAD_MAXSIZE: 10 * 1024 * 1024
     
 }
 

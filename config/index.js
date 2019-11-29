@@ -12,8 +12,8 @@ const dbConfig = NODE_ENV === 'development '? require('./config.dev.js') : requi
 const config = {
     NODE_ENV,
     API_ROOT: '/api',
-    SECRET_KEY:'chenzhen',
-    EXPIRES_IN: 60 * 60 * 24,
+    JWT_SECRET_KEY:'chenzhen',
+    JWT_EXPIRES_IN: 60 * 60 * 24,
     ...dbConfig
 
 }

@@ -2,7 +2,7 @@
  * @Description: 用户服务层
  * @Author: chenzhen
  * @Date: 2019-11-25 18:02:42
- * @LastEditTime: 2019-11-28 11:14:20
+ * @LastEditTime: 2019-11-29 15:38:13
  * @LastEditors: chenzhen
  */
 const User  = require('../models/user');
@@ -32,4 +32,15 @@ exports.addUser = async(user) => {
       return Promise.reject(error)
    })
 }
+
+exports.findAllUser = async() => {
+   return await User.findAll({
+      attributes: ['id','user_name','create_time','update_time']
+   }).then((result)=>{
+      return Promise.resolve(result)
+   }).catch((error)=>{
+      return Promise.reject(error)
+   })
+}
+
 

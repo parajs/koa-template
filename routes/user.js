@@ -2,12 +2,12 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-11-28 18:31:20
+ * @LastEditTime: 2019-11-29 18:46:53
  * @LastEditors: chenzhen
  */
 
 const router = require('koa-router')()
-const { findUserByUserNamePassword, addUser } = require('../services/user')
+const { findUserByUserNamePassword, addUser, findAllUser} = require('../services/user')
 const { result,errorResult } = require('../utils/resultUtil')
 const sha256 = require('sha256')
 const { jwtSign } = require('../utils/jwtUtil')
@@ -65,9 +65,17 @@ router.post('/signup',async(ctx) => {
 
 })
 
-router.post('/logout',async(ctx) => {
-  const { Authorization } = ctx.header
-
+/**
+ * @description: 查询所有用户
+ * @param {type} 
+ * @return: 
+ */
+router.post('/findAllUser',async(ctx) => {
+  await findAllUser().then((rows) => {
+    ctx.body = result({data: rows})
+  }).catch(() => {
+    ctx.body = errorResult()
+  })
 })
     
 module.exports = router
