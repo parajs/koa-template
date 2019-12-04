@@ -8,7 +8,7 @@
 
 const router = require('koa-router')()
 const { findUserByUserNamePassword, addUser, findAllUser} = require('../services/user')
-const { result,errorResult } = require('../utils/resultUtil')
+const { success,error } = require('../utils/resultUtil')
 const sha256 = require('sha256')
 const { jwtSign } = require('../utils/jwtUtil')
 
@@ -25,13 +25,13 @@ router.post('/login',async(ctx) => {
           if( user.password === hashPwd ){
             const {id, user_name} = user
             const token = jwtSign({id,user_name})
-            ctx.body = result({data: {id, user_name,token}})
+            ctx.body = success({data: {id, user_name,token}})
           } else {
-            ctx.body = errorResult({msg: '用户名或密码不正确'}) 
+            ctx.body = error({msg: '用户名或密码不正确'}) 
           }
       })     
     } else {
-      ctx.body = errorResult({msg: '请输入用户名和密码'}) 
+      ctx.body = error({msg: '请输入用户名和密码'}) 
   }
 })
 
@@ -48,18 +48,18 @@ router.post('/signup',async(ctx) => {
       await findUserByUserNamePassword(user_name, hashPwd).then(async(user)=>{
         if (!user) {
             await addUser({user_name, password: hashPwd}).then(()=>{
-              ctx.body = result()
+              ctx.body = success()
             })
           } else {
-            ctx.body = errorResult({msg: '用户名已存在'}) 
+            ctx.body = error({msg: '用户名已存在'}) 
           }
       })     
      
     } else {
-      ctx.body = errorResult({msg: '密码不一致'}) 
+      ctx.body = error({msg: '密码不一致'}) 
     }
   } else {
-    ctx.body = errorResult({msg: '请输入用户名和密码'}) 
+    ctx.body = error({msg: '请输入用户名和密码'}) 
   }
   
 

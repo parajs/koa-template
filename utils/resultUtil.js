@@ -6,16 +6,28 @@
  * @LastEditors: chenzhen
  */
 
-const result = (options = {}) => {
-    const defaultOpts = {
-        code: 200,
-        msg: '操作成功',
-        data: null
-    }
+const errorSettings = {
+    code: 500,
+    msg: '服务器内部异常',
+    data: null
+}
 
-    if (Object.prototype.toString.call(options) === '[object Object]' ){
+const successSettings = {
+    code: 200,
+    msg: '操作成功',
+    data: null
+}
+
+const result = (options = {}, type) => {
+    const toString = Object.prototype.toString.call(options)
+    if (toString === '[object Object]' ){
         let result = {}
-        Object.assign(result ,defaultOpts, options)
+        if(type === 0){
+            Object.assign(result ,errorSettings, options)
+        }
+        if(type === 1){
+            Object.assign(result ,successSettings, options)
+        }
         return result
     } else {
         console.error("resulttUtil:expected plain object")
@@ -23,28 +35,21 @@ const result = (options = {}) => {
     
 }
 
-const errorResult = () => {
-    const defaultError = {
-        code: 500,
-        msg: '服务器内部异常',
-        data: null
-    }
-    
-    result(defaultError)
+
+
+const error = (opts) => {
+    result(opts, 0)
 }
 
-const unauthorizedResult = () => {
-    const unauthorized = {
-        code: 401,
-        msg: '没有操作权限',
-        data: null
-    }
-    
-    result(unauthorized)
+const success = (opts) => {
+    result(opts, 1)
 }
+
+
 
 module.exports = {
-    errorResult,
-    unauthorizedResult,
-    result
+    error,
+    success
 }
+
+
