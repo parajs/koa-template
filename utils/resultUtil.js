@@ -2,18 +2,19 @@
  * @Description: 生成响应结果
  * @Author: chenzhen
  * @Date: 2019-11-27 16:19:34
- * @LastEditTime: 2019-11-28 16:34:55
+ * @LastEditTime: 2019-12-09 17:37:48
  * @LastEditors: chenzhen
  */
+var HttpStatus = require('http-status-codes');
 
 const errorSettings = {
-    code: 500,
+    code: HttpStatus.INTERNAL_SERVER_ERROR,
     msg: '服务器内部异常',
     data: null
 }
 
 const successSettings = {
-    code: 200,
+    code: HttpStatus.OK,
     msg: '操作成功',
     data: null
 }
@@ -38,11 +39,11 @@ const result = (options = {}, type) => {
 
 
 const error = (opts) => {
-    result(opts, 0)
+    return result(opts, 0)
 }
 
 const success = (opts) => {
-    result(opts, 1)
+    return result(opts, 1)
 }
 
 
