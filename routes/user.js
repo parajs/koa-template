@@ -2,7 +2,7 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-09 18:24:11
+ * @LastEditTime: 2019-12-09 19:58:27
  * @LastEditors: chenzhen
  */
 
@@ -22,7 +22,7 @@ router.post('/login',async(ctx) => {
     if ( user_name && password ) {
       const hashPwd = sha256(`${user_name}${password}`)
       await findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
-          if( user.password === hashPwd ){
+          if( user && user.password === hashPwd ){
             const {id, user_name} = user
             const token = jwtSign({id,user_name})
             ctx.body = success({data: {id, user_name,token}})
@@ -72,9 +72,9 @@ router.post('/signup',async(ctx) => {
  */
 router.post('/findAllUser',async(ctx) => {
   await findAllUser().then((rows) => {
-    ctx.body = result({data: rows})
+    ctx.body = success({data: rows})
   }).catch(() => {
-    ctx.body = errorResult()
+    ctx.body = error()
   })
 })
     

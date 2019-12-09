@@ -2,7 +2,7 @@
  * @Description: 生成响应结果
  * @Author: chenzhen
  * @Date: 2019-11-27 16:19:34
- * @LastEditTime: 2019-12-09 17:37:48
+ * @LastEditTime: 2019-12-09 20:04:16
  * @LastEditors: chenzhen
  */
 var HttpStatus = require('http-status-codes');
@@ -10,12 +10,14 @@ var HttpStatus = require('http-status-codes');
 const errorSettings = {
     code: HttpStatus.INTERNAL_SERVER_ERROR,
     msg: '服务器内部异常',
+    errMsg: '',
     data: null
 }
 
 const successSettings = {
     code: HttpStatus.OK,
     msg: '操作成功',
+    errMsg: '',
     data: null
 }
 

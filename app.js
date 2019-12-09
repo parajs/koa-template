@@ -2,7 +2,7 @@
  * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-09 19:15:20
+ * @LastEditTime: 2019-12-09 20:03:36
  * @LastEditors: chenzhen
  */
 const Koa = require('koa')
@@ -40,21 +40,17 @@ app.use(async function(ctx, next) {
       })
     }
   } catch (err) {
-    if (ctx.status == 401) {
+    if (err.status == 401) {
       ctx.body = error({
           code: HttpStatus.UNAUTHORIZED, 
-          msg: '未授权，请重新登录',
+          msg: '未授权或过期，请重新登录',
           errMsg: err
         })
-    } else if (ctx.status === 404){
-      ctx.body = error({
-        code: HttpStatus.NOT_FOUND, 
-        msg: '地址不存在'
-      })
     } else {
       ctx.body = error({
         code: HttpStatus.INTERNAL_SERVER_ERROR, 
-        msg: '服务内部错误'
+        msg: '服务内部错误',
+        errMsg: err
       })
     }
   }
