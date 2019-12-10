@@ -2,13 +2,14 @@
  * @Description: 本地开发配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:23
- * @LastEditTime: 2019-11-29 18:23:43
+ * @LastEditTime: 2019-12-10 11:08:35
  * @LastEditors: chenzhen
  */
 
 const dbConfig = {
+    // 数据库
     MYSQL_DATABASE: 'koa_template',
-    MYSQL_HOST: 'localhost',
+    MYSQL_HOST: 'localhost1',
     MYSQL_PORT: 3306,
     MYSQL_USERNAME: 'root',
     MYSQL_PASSWORD: '123456',

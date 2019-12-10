@@ -2,12 +2,13 @@
  * @Description: 
  * @Author: icony/精武陈真
  * @Date: 2019-11-24 01:14:55
- * @LastEditTime: 2019-11-28 15:13:01
+ * @LastEditTime: 2019-12-10 12:03:24
  * @LastEditors: chenzhen
  */
 
 const  config = require('../config');
 const Sequelize = require('sequelize');
+const sendEmail = require('./emailUtil.js')
 
 const sequelize = new Sequelize(
     config.MYSQL_DATABASE, 
@@ -41,6 +42,11 @@ sequelize
     console.log('Connection has been established successfully.');
   })
   .catch(err => {
+    sendEmail({
+      to: '546369005@qq.com',
+      subject: 'mysql-error',
+      msg: '<p>错误信息: </p>' + JSON.stringify(err) + '<p>请你及时处理</p >'
+    })
     console.error('Unable to connect to the database:', err);
   });
 

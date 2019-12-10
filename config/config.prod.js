@@ -2,11 +2,12 @@
  * @Description: 线上环境配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:35
- * @LastEditTime: 2019-11-28 15:07:54
+ * @LastEditTime: 2019-12-10 11:08:25
  * @LastEditors: chenzhen
  */
 
 const dbConfig = {
+    // 数据库
     MYSQL_DATABASE: 'koa_template',
     MYSQL_HOST: 'localhost',
     MYSQL_PORT: 3306,
