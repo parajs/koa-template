@@ -2,7 +2,7 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-09 19:58:27
+ * @LastEditTime: 2019-12-11 11:00:14
  * @LastEditors: chenzhen
  */
 
@@ -32,7 +32,7 @@ router.post('/login',async(ctx) => {
       })     
     } else {
       ctx.body = error({msg: '请输入用户名和密码'}) 
-  }
+    }
 })
 
 /**

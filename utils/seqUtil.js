@@ -1,8 +1,8 @@
 /*
- * @Description: 
+ * @Description: sequelizel连接数据库
  * @Author: icony/精武陈真
  * @Date: 2019-11-24 01:14:55
- * @LastEditTime: 2019-12-10 12:03:24
+ * @LastEditTime: 2019-12-11 17:51:05
  * @LastEditors: chenzhen
  */
 
@@ -39,7 +39,7 @@ const sequelize = new Sequelize(
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    console.log('Database connection has been established successfully.');
   })
   .catch(err => {
     sendEmail({

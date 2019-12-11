@@ -2,7 +2,7 @@
  * @Description: 生成响应结果
  * @Author: chenzhen
  * @Date: 2019-11-27 16:19:34
- * @LastEditTime: 2019-12-09 20:04:16
+ * @LastEditTime: 2019-12-12 00:13:41
  * @LastEditors: chenzhen
  */
 var HttpStatus = require('http-status-codes');
@@ -33,7 +33,7 @@ const result = (options = {}, type) => {
         }
         return result
     } else {
-        console.error("resulttUtil:expected plain object")
+        console.error("resultUtil:expected plain object")
     }
     
 }
