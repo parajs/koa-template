@@ -2,7 +2,7 @@
  * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-11 22:32:05
+ * @LastEditTime: 2019-12-12 19:47:22
  * @LastEditors: chenzhen
  */
 const Koa = require('koa')
@@ -13,11 +13,11 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 // const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body')
-const logger = require('koa-logger')
+// const logger = require('koa-logger')  // 用log4js记录日志
 const responseTime = require('koa-response-time')
 const cors = require('@koa/cors')
 const koaJwt = require("koa-jwt")
-const { JWT_SECRET_KEY, API_ROOT } = require('./config')
+const { JWT_SECRET_KEY, API_ROOT, UPLOAD_MAXSIZE, UPLOAD_DIR } = require('./config')
 const routes = require('./routes')
 const catchError = require('./middleware/catchError')
 const log4js = require('./middleware/logger')
@@ -43,10 +43,10 @@ app.use(cors({
 app.use(koaBody({
   multipart:true, // 支持文件上传
   formidable:{
-    uploadDir:path.join(__dirname,'public/upload/'), // 设置文件上传目录
+    uploadDir: UPLOAD_DIR, // 设置文件上传目录
     keepExtensions: true,    // 保持文件的后缀
     multipart: true,
-    maxFieldsSize:10 * 1024 * 1024, // 文件上传大小
+    maxFieldsSize: UPLOAD_MAXSIZE, // 文件上传大小
     onFileBegin:(name,file) => { // 文件上传前的设置
       // console.log(`name: ${name}`);
       // console.log(file);
@@ -94,9 +94,6 @@ routes(app)
 
 // error-handling
 app.on('error', (err, ctx) => {
-  ctx.body = {
-    code: 200
-  }
   console.error('server error', err, ctx)
 });
 

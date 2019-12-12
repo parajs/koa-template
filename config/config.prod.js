@@ -2,11 +2,22 @@
  * @Description: 线上环境配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:35
- * @LastEditTime: 2019-12-10 11:08:25
+ * @LastEditTime: 2019-12-12 19:22:17
  * @LastEditors: chenzhen
  */
 
 const dbConfig = {
+    API_ROOT: '/api',
+
+    JWT_SECRET_KEY:'chenzhen', // 密钥
+    JWT_EXPIRES_IN: 60 * 60 * 24, // 过期时间
+
+    EMAIL_USER: '546369005@qq.com', // 发送者邮箱
+    EMAIL_ALIASNAME: '某某系统', // 发送者别名
+    EMAIL_PASS: 'wmiajeacdozebcag', // 发送者smtp授权码
+    EMAIL_HOST: 'smtp.qq.com', // SMTP服务器
+    EAMIL_PORT: 465, // SMTP服务器端口
+    
     // 数据库
     MYSQL_DATABASE: 'koa_template',
     MYSQL_HOST: 'localhost',
@@ -19,15 +30,20 @@ const dbConfig = {
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    LOG4JS: {
+        appenders: {
+            console: {//控制台输出
+                type: 'console'
+            }
+        },
+        categories: {
+            default: { appenders: ['console'], level: 'info' }
+        }
+    },
+    UPLOAD_MAXSIZE: 10 * 1024 * 1024
     
 }
 
 
-
-const configProd = {
-    ...dbConfig
-} 
-
-
-module.exports = configProd
+module.exports = { ...dbConfig }

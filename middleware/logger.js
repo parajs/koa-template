@@ -2,12 +2,12 @@
  * @Description: 日志中间件
  * @Author: chenzhen
  * @Date: 2019-12-11 16:25:57
- * @LastEditTime: 2019-12-11 22:34:31
+ * @LastEditTime: 2019-12-12 18:22:06
  * @LastEditors: chenzhen
  */
 
-const { getLogger, log4js } = require('../utils/log4jsUtil')
-const logger = getLogger("http请求")
+const { getLogger } = require('../utils/log4jsUtil')
+const logger = getLogger()
 // module.exports =  function(ctx, next) {
 //   log4js.connectLogger(getLogger(), {
 // 		format: '[:remote-addr :method :url :status :response-timems][:referrer HTTP/:http-version :user-agent]'//自定义输出格式
