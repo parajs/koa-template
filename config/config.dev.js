@@ -2,7 +2,7 @@
  * @Description: 本地开发配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:23
- * @LastEditTime: 2019-12-12 19:45:32
+ * @LastEditTime: 2019-12-13 00:13:09
  * @LastEditors: chenzhen
  */
 
@@ -34,6 +34,8 @@ const dbConfig = {
     },
     // log4js配置
     LOG4JS: {
+        pm2: true,
+	    disableClustering: true,
         appenders: {
             console: {//控制台输出
                 type: 'console'
@@ -43,6 +45,7 @@ const dbConfig = {
             default: { appenders: ['console'], level: 'info' }
         }
     },
+    // 文件上传
     UPLOAD_MAXSIZE: 10 * 1024 * 1024,
     UPLOAD_DIR: '../public/upload'
     
