@@ -2,10 +2,10 @@
  * @Description: 用户服务层
  * @Author: chenzhen
  * @Date: 2019-11-25 18:02:42
- * @LastEditTime: 2019-11-29 15:38:13
+ * @LastEditTime: 2019-12-13 17:19:06
  * @LastEditors: chenzhen
  */
-const User  = require('../models/user');
+const { User }  = require('../models');
 
 /**
  * @description: 查询用户信息

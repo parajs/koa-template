@@ -2,7 +2,7 @@
  * @Description: 全局异常处理
  * @Author: chenzhen
  * @Date: 2019-12-11 16:25:57
- * @LastEditTime: 2019-12-12 12:23:50
+ * @LastEditTime: 2019-12-13 12:02:51
  * @LastEditors: chenzhen
  */
 const { error } = require('../utils/resultUtil')

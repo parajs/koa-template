@@ -2,7 +2,7 @@
  * @Description: 线上环境配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:35
- * @LastEditTime: 2019-12-12 19:22:17
+ * @LastEditTime: 2019-12-13 16:41:01
  * @LastEditors: chenzhen
  */
 
@@ -41,7 +41,7 @@ const dbConfig = {
             default: { appenders: ['console'], level: 'info' }
         }
     },
-    UPLOAD_MAXSIZE: 10 * 1024 * 1024
+    UPLOAD_MAXSIZE: 2 * 1024 * 1024
     
 }
 

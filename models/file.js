@@ -1,21 +1,22 @@
 /*
  * @Description: 用户
- * @Author: icony/精武陈真
- * @Date: 2019-11-25 00:44:25
- * @LastEditTime: 2019-12-13 23:40:16
+ * @Author: chenzhen
+ * @Date: 2019-12-13 17:09:37
+ * @LastEditTime: 2019-12-13 23:33:38
  * @LastEditors: chenzhen
  */
-
 const  { sequelize, Sequelize } = require('../utils/seqUtil');
 
-const User = sequelize.define('user', {
+const File = sequelize.define('file', {
     id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
         autoIncrement: true
     },
-    user_name: {type: Sequelize.STRING(255), unique: 'uk_user_name'},
-    password: Sequelize.STRING(255),
+    user_id: {
+        type: Sequelize.BIGINT
+    },
+    file_name: Sequelize.STRING(255),
     create_time: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
@@ -26,4 +27,5 @@ const User = sequelize.define('user', {
     },
 });
 
-module.exports = User
+
+module.exports = File

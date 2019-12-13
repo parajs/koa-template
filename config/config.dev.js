@@ -2,7 +2,7 @@
  * @Description: 本地开发配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:23
- * @LastEditTime: 2019-12-13 00:13:09
+ * @LastEditTime: 2019-12-13 16:52:52
  * @LastEditors: chenzhen
  */
 
@@ -46,8 +46,8 @@ const dbConfig = {
         }
     },
     // 文件上传
-    UPLOAD_MAXSIZE: 10 * 1024 * 1024,
-    UPLOAD_DIR: '../public/upload'
+    UPLOAD_MAXSIZE: 50 * 1024 * 1024,
+    UPLOAD_DIR: '/upload'
     
 }
 

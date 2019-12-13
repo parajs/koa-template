@@ -2,12 +2,12 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-12 23:00:48
+ * @LastEditTime: 2019-12-13 17:48:09
  * @LastEditors: chenzhen
  */
 
 const router = require('koa-router')()
-const { findUserByUserNamePassword, addUser, findAllUser} = require('../services/user')
+const { User } = require('../services')
 const { success,error } = require('../utils/resultUtil')
 const sha256 = require('sha256')
 const { jwtSign } = require('../utils/jwtUtil')
@@ -21,7 +21,7 @@ router.post('/login',async(ctx) => {
     const { user_name, password} = ctx.request.body
     if ( user_name && password ) {
       const hashPwd = sha256(`${user_name}${password}`)
-      await findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
+      await User.findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
           if( user && user.password === hashPwd ){
             const {id, user_name} = user
             const token = jwtSign({id,user_name})
@@ -45,7 +45,7 @@ router.post('/signup',async(ctx) => {
   if(user_name && password && confirm_password){
     if (confirm_password === password) {
       const hashPwd = sha256(`${user_name}${password}`)
-      await findUserByUserNamePassword(user_name, hashPwd).then(async(user)=>{
+      await User.findUserByUserNamePassword(user_name, hashPwd).then(async(user)=>{
         if (!user) {
             await addUser({user_name, password: hashPwd}).then(()=>{
               ctx.body = success()
@@ -71,7 +71,7 @@ router.post('/signup',async(ctx) => {
  * @return: 
  */
 router.post('/findAllUser',async(ctx) => {
-  await findAllUser().then((rows) => {
+  await User.findAllUser().then((rows) => {
     ctx.body = success({data: rows})
   }).catch(() => {
     ctx.body = error()
