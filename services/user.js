@@ -2,7 +2,7 @@
  * @Description: 用户服务层
  * @Author: chenzhen
  * @Date: 2019-11-25 18:02:42
- * @LastEditTime: 2019-12-13 17:19:06
+ * @LastEditTime: 2019-12-14 01:04:17
  * @LastEditors: chenzhen
  */
 const { User }  = require('../models');
@@ -13,11 +13,7 @@ const { User }  = require('../models');
  * @return: 
  */
 exports.findUserByUserNamePassword = async(user_name, password) => {
-   return await User.findOne({ where: { user_name, password } }).then((result)=>{
-      return Promise.resolve(result)
-   }).catch((error)=>{
-      return Promise.reject(error)
-   })
+   return await User.findOne({ where: { user_name, password } })
 }
 
 /**
@@ -26,20 +22,12 @@ exports.findUserByUserNamePassword = async(user_name, password) => {
  * @return: 
  */
 exports.addUser = async(user) => {
-   return await User.create(user).then((result)=>{
-      return Promise.resolve(result)
-   }).catch((error)=>{
-      return Promise.reject(error)
-   })
+   return await User.create(user)
 }
 
 exports.findAllUser = async() => {
    return await User.findAll({
       attributes: ['id','user_name','create_time','update_time']
-   }).then((result)=>{
-      return Promise.resolve(result)
-   }).catch((error)=>{
-      return Promise.reject(error)
    })
 }
 

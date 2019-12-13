@@ -2,7 +2,7 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-13 17:48:09
+ * @LastEditTime: 2019-12-14 01:12:46
  * @LastEditors: chenzhen
  */
 
@@ -21,15 +21,14 @@ router.post('/login',async(ctx) => {
     const { user_name, password} = ctx.request.body
     if ( user_name && password ) {
       const hashPwd = sha256(`${user_name}${password}`)
-      await User.findUserByUserNamePassword(user_name, hashPwd).then((user)=>{
-          if( user && user.password === hashPwd ){
-            const {id, user_name} = user
-            const token = jwtSign({id,user_name})
-            ctx.body = success({data: {id, user_name,token}})
-          } else {
-            ctx.body = error({msg: '用户名或密码不正确'}) 
-          }
-      })     
+      const result =  await User.findUserByUserNamePassword(user_name, hashPwd)
+      if( result && result.password === hashPwd ){
+        const {id, user_name} = result
+        const token = jwtSign({id,user_name})
+        ctx.body = success({data: {id, user_name,token}})
+      } else {
+        ctx.body = error({msg: '用户名或密码不正确'}) 
+      }
     } else {
       ctx.body = error({msg: '请输入用户名和密码'}) 
     }
@@ -45,16 +44,15 @@ router.post('/signup',async(ctx) => {
   if(user_name && password && confirm_password){
     if (confirm_password === password) {
       const hashPwd = sha256(`${user_name}${password}`)
-      await User.findUserByUserNamePassword(user_name, hashPwd).then(async(user)=>{
-        if (!user) {
-            await addUser({user_name, password: hashPwd}).then(()=>{
-              ctx.body = success()
-            })
-          } else {
-            ctx.body = error({msg: '用户名已存在'}) 
-          }
-      })     
-     
+      const result = await User.findUserByUserNamePassword(user_name, hashPwd)
+
+      if (!result) {
+          await addUser({user_name, password: hashPwd})
+          ctx.body = success()
+        } else {
+          ctx.body = error({msg: '用户名已存在'}) 
+      }
+      
     } else {
       ctx.body = error({msg: '密码不一致'}) 
     }
@@ -71,11 +69,8 @@ router.post('/signup',async(ctx) => {
  * @return: 
  */
 router.post('/findAllUser',async(ctx) => {
-  await User.findAllUser().then((rows) => {
-    ctx.body = success({data: rows})
-  }).catch(() => {
-    ctx.body = error()
-  })
+  const result = await User.findAllUser()
+  ctx.body = success({data: result})
 })
     
 module.exports = router
