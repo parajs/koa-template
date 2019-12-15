@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development node bin/www ",
+    "start": "cross-env NODE_ENV=development node src/bin/www ",
     "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon bin/www",
-    "prd": "cross-env NODE_ENV=production pm2 start bin/www",
+    "prd": "cross-env NODE_ENV=production pm2 start src/bin/www",
+    "lint": "eslint --ext .js src",
+    "lint:fix": "eslint --ext .js src --fix",
     "mysqlConnect": "node ./test/mysqlConnect.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
