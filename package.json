@@ -19,6 +19,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
+      "prettier --write",
       "git add"
     ]
   },
@@ -50,11 +51,18 @@
     "shortid": "^2.2.15"
   },
   "devDependencies": {
+    "commitizen": "^4.0.3",
     "cross-env": "^6.0.3",
+    "cz-conventional-changelog": "^3.0.2",
     "eslint": "^6.7.1",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "nodemon": "^2.0.1",
     "sequelize-auto": "^0.4.29"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
