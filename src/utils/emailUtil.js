@@ -2,7 +2,7 @@
  * @Description: 发邮件工具--邮箱需要开启POP3/SMTP服务、IMAP/SMTP服务
  * @Author: chenzhen
  * @Date: 2019-12-09 20:08:42
- * @LastEditTime: 2019-12-10 11:43:51
+ * @LastEditTime: 2019-12-15 21:59:45
  * @LastEditors: chenzhen
  */
 
@@ -31,7 +31,7 @@ function sendEmail({to, subject, msg}) {
 			subject: subject, // 邮件主题
 			//text    : msg,
 			html: msg
-		}, function(err, _) {
+		}, function(err) {
 			if (err) {
 				reject(err)
 			} else {

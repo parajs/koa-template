@@ -2,17 +2,15 @@
  * @Description: 上传文件模块
  * @Author: chenzhen
  * @Date: 2019-12-12 22:48:06
- * @LastEditTime: 2019-12-14 01:00:27
+ * @LastEditTime: 2019-12-15 22:01:28
  * @LastEditors: chenzhen
  */
 const router = require('koa-router')()
 const { UPLOAD_MAXSIZE, UPLOAD_DIR } = require('../config')
 const koaBody = require('koa-body')
-const { success,error } = require('../utils/resultUtil')
+const { success } = require('../utils/resultUtil')
 const { File } = require('../services')
 const fs = require('fs-extra')
-const Koa = require('koa')
-const app = new Koa()
 const { getUploadFileExt, getUploadFileName, getUploadDirName } = require('../utils/fileUtil')
 
 /**

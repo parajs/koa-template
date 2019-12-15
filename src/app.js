@@ -2,11 +2,11 @@
  * @Description: 程序入口
  * @Author: icony/精武陈真
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-13 16:55:34
+ * @LastEditTime: 2019-12-15 21:55:45
  * @LastEditors: chenzhen
  */
 const Koa = require('koa')
-const path = require('path')
+// const path = require('path')
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')

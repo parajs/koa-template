@@ -2,13 +2,12 @@
  * @Description: 文件模块
  * @Author: chenzhen
  * @Date: 2019-12-13 18:34:29
- * @LastEditTime: 2019-12-13 23:48:37
+ * @LastEditTime: 2019-12-15 22:00:15
  * @LastEditors: chenzhen
  */
 const moment = require('moment')
 const shortid = require('shortid')
 
-const { UPLOAD_DIR } = require('../config')
 /**
  * @description: 获取目录
  * @param {type} 

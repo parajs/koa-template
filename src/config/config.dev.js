@@ -2,7 +2,7 @@
  * @Description: 本地开发配置
  * @Author: chenzhen
  * @Date: 2019-11-28 12:30:23
- * @LastEditTime: 2019-12-13 16:52:52
+ * @LastEditTime: 2019-12-15 22:47:36
  * @LastEditors: chenzhen
  */
 
@@ -35,7 +35,7 @@ const dbConfig = {
     // log4js配置
     LOG4JS: {
         pm2: true,
-	    disableClustering: true,
+        disableClustering: true,
         appenders: {
             console: {//控制台输出
                 type: 'console'

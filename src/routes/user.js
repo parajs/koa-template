@@ -2,7 +2,7 @@
  * @Description: 用户模块
  * @Author: chenzhen
  * @Date: 2019-11-19 15:28:27
- * @LastEditTime: 2019-12-14 01:12:46
+ * @LastEditTime: 2019-12-15 21:58:44
  * @LastEditors: chenzhen
  */
 
@@ -47,7 +47,7 @@ router.post('/signup',async(ctx) => {
       const result = await User.findUserByUserNamePassword(user_name, hashPwd)
 
       if (!result) {
-          await addUser({user_name, password: hashPwd})
+          await User.addUser({user_name, password: hashPwd})
           ctx.body = success()
         } else {
           ctx.body = error({msg: '用户名已存在'}) 
