@@ -13,6 +13,14 @@
     "mysqlConnect": "node ./test/mysqlConnect.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "description": "基于koa封装模板，支持JWT身份认证、文件上传、跨域、异常处理等功能，采用sequelize作为mysql存储ORM框架，支持docker部署",
+  "keywords": ["koa", "koa-template", "node", "pm2"],
+  "author": "chenzhen <546369005@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parajs/koa-template.git"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
