@@ -5,7 +5,7 @@ module.exports = {
 
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     args: 'one two',
-    instances: 1,
+    instances: 4,
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
@@ -19,12 +19,16 @@ module.exports = {
 
   deploy : {
     production : {
-      user : 'node',
-      host : '212.83.163.1',
+      user : 'root',
+      host : '192.168.10.179',
+      port: 22,
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
+      repo : 'https://github.com/parajs/koa-template.git',
       path : '/var/www/production',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
+      env  : {
+        NODE_ENV: "production"
+      }
     }
   }
 };
